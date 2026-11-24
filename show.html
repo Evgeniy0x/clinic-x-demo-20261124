@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+  <meta name="theme-color" content="#f7f6ef">
+  <title>Клиника X · Показ одного приёма</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f7f6ef;
+      --white: #fffef9;
+      --ink: #16342b;
+      --soft: #466055;
+      --pine: #193e32;
+      --pine-deep: #132f28;
+      --mint: #e7eee3;
+      --line: #d3dfd3;
+      --warm: #f4ead4;
+      font: 16px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; background: var(--paper); color: var(--ink); }
+    button { font: inherit; cursor: pointer; }
+    button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid #9c6222; outline-offset: 3px; }
+    button:disabled { cursor: default; color: #53615a; background: transparent; }
+    h1, h2, p, dl, dd, ol { margin: 0; }
+    .frame { width: min(100% - 88px, 1280px); margin: 0 auto; }
+    .top { border-bottom: 1px solid #dce3d7; }
+    .top .frame, .bottom .frame { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 690; letter-spacing: -.02em; font-size: .99rem; }
+    .mark { display: grid; place-items: center; width: 38px; height: 38px; background: var(--pine); color: #fffef8; font: 1.55rem/1 Georgia, serif; border-radius: 12px 12px 12px 3px; }
+    .mode { color: var(--soft); font-size: .78rem; }
+    main.frame { flex: 1; display: grid; align-content: center; }
+    .scene { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(28px, 5.6vw, 94px); align-items: center; padding: clamp(32px, 6vh, 82px) 0; }
+    .story { min-width: 0; }
+    .eyebrow { margin-bottom: 15px; color: var(--soft); font-weight: 730; letter-spacing: .105em; font-size: .72rem; text-transform: uppercase; }
+    h1 { max-width: 12ch; font: 400 clamp(3rem, 5.8vw, 5.55rem)/.96 Georgia, "Times New Roman", serif; letter-spacing: -.065em; text-wrap: balance; }
+    h1:focus { outline: none; }
+    .lead { margin-top: 20px; max-width: 36ch; color: var(--soft); font-size: clamp(1rem, 1.45vw, 1.18rem); }
+    .advance { display: inline-flex; align-items: center; justify-content: space-between; gap: 22px; min-height: 54px; margin-top: 29px; padding: 11px 19px; border: 1px solid var(--pine); border-radius: 10px; background: var(--pine); color: #fffef9; font-weight: 720; line-height: 1.2; }
+    .advance:hover { background: #285142; }
+    .advance span { font-size: 1.18rem; }
+    .stage { position: relative; display: grid; place-items: center; isolation: isolate; min-width: 0; min-height: clamp(360px, 39vw, 510px); overflow: hidden; padding: clamp(22px, 4.8vw, 66px); border-radius: 24px 24px 24px 7px; background: var(--pine); background-image: radial-gradient(ellipse at 82% 5%, #386050, transparent 61%), radial-gradient(ellipse at 16% 120%, #245444, transparent 65%); }
+    .stage::before, .stage::after { position: absolute; z-index: -1; content: ""; width: 61%; aspect-ratio: 1; border: 1px solid #cfe2cd31; border-radius: 50%; right: -14%; bottom: -40%; }
+    .stage::after { width: 73%; right: -20%; bottom: -48%; }
+    .stage-end { padding-inline: clamp(17px, 3vw, 42px); }
+    .window { width: min(100%, 455px); box-shadow: 0 24px 65px #10271d48; border: 1px solid #f3f6ee; border-radius: 13px; overflow: hidden; background: var(--white); }
+    .chrome { display: flex; align-items: center; justify-content: space-between; min-height: 48px; gap: 8px; padding: 9px 16px; border-bottom: 1px solid var(--line); color: var(--soft); font-size: .8rem; }
+    .chrome strong { color: var(--ink); }
+    .window-body { padding: clamp(14px, 2.55vw, 29px); }
+    .window-label { color: var(--soft); font-size: .78rem; }
+    .window h2 { margin-top: 3px; font-size: clamp(1.18rem, 2.8vw, 1.66rem); line-height: 1.1; letter-spacing: -.037em; }
+    .mini-fields { margin-top: 17px; display: grid; gap: 7px; }
+    .value, .snippet { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-width: 0; padding: 9px 12px; border-radius: 7px; background: var(--mint); color: var(--ink); font-size: .87rem; }
+    .value dt { color: var(--soft); font-size: .75rem; }
+    .value dd { font-weight: 670; text-align: right; }
+    .snippet { display: block; line-height: 1.34; }
+    .snippet b { display: block; margin-bottom: 3px; color: var(--soft); font-weight: 630; font-size: .75rem; }
+    .snippet.draft { border: 1px solid #ecd8af; background: var(--warm); }
+    .role-chip { flex: none; padding: 3px 7px; border-radius: 5px; background: var(--mint); color: var(--ink); font-weight: 650; font-size: .72rem; }
+    .result-pair { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; align-items: start; }
+    .result-pair .window { height: 100%; }
+    .result-pair .window-body { min-height: 126px; }
+    .result-pair .window-body p { margin-top: 8px; color: var(--soft); font-size: .87rem; line-height: 1.3; }
+    .bottom { border-top: 1px solid #dce3d7; }
+    .bottom .frame { min-height: 61px; }
+    .bottom nav { display: flex; gap: 6px; align-items: center; }
+    .quiet { padding: 8px 10px; border: 0; border-radius: 6px; min-height: 44px; background: transparent; font-size: .82rem; color: var(--ink); }
+    .quiet:hover:enabled { background: var(--mint); }
+    .step-line { display: flex; gap: 4px; list-style: none; padding: 0; }
+    .step-line li { position: relative; width: 24px; height: 4px; border-radius: 5px; background: #cbd7c9; }
+    .step-line li[aria-current="step"] { background: var(--pine); }
+    .step-line span { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    dialog { width: min(92vw, 480px); border: 1px solid var(--line); border-radius: 14px; padding: 20px; background: var(--white); color: var(--ink); }
+    dialog::backdrop { background: #132f2880; }
+    dialog h2 { font-size: 1.2rem; letter-spacing: -.02em; }
+    dialog p { margin: 9px 0 13px; }
+    @media (max-width: 880px) {
+      .frame { width: min(100% - 40px, 680px); }
+      .scene { grid-template-columns: 1fr; gap: 20px; padding: 24px 0; }
+      .stage { min-height: 0; padding: clamp(16px, 4vw, 35px); }
+      .eyebrow { margin-bottom: 9px; }
+      h1 { max-width: 16ch; font-size: clamp(2.45rem, 9.2vw, 4.35rem); }
+      .lead { margin-top: 10px; }
+      .advance { margin-top: 16px; min-height: 48px; }
+    }
+    @media (max-width: 485px) {
+      .frame { width: calc(100% - 30px); }
+      .top .frame, .bottom .frame { min-height: 56px; gap: 6px; }
+      .brand { font-size: .83rem; }
+      .mark { width: 32px; height: 32px; font-size: 1.25rem; }
+      .mode { font-size: .68rem; text-align: right; }
+      .scene { padding: 19px 0; gap: 15px; }
+      .stage { padding: 12px; border-radius: 13px 13px 13px 4px; }
+      .window-body { padding: 12px; }
+      .chrome { padding: 7px 10px; min-height: 37px; font-size: .73rem; }
+      .mini-fields { margin-top: 11px; gap: 5px; }
+      .value, .snippet { padding: 7px 8px; }
+      .result-pair { grid-template-columns: 1fr; gap: 6px; }
+      .result-pair .window-body { min-height: 0; }
+      .result-pair .window-body p { margin-top: 4px; font-size: .8rem; }
+      .quiet { padding-inline: 7px; }
+      .step-line li { width: 15px; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .advance, .quiet { transition: background-color .15s ease; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="frame">
+      <div class="brand"><span class="mark" aria-hidden="true">X</span>Клиника X</div>
+      <p class="mode">Учебный показ</p>
+    </div>
+  </header>
+  <main class="frame">
+    <section class="scene" data-scene aria-labelledby="site-title">
+      <div class="story">
+        <p class="eyebrow">Сайт клиники</p>
+        <h1 id="site-title" tabindex="-1">Пациент выбирает приём</h1>
+        <p class="lead">Заявка сразу появится у регистратуры.</p>
+        <button class="advance" type="button" data-next>Создать учебную заявку <span aria-hidden="true">→</span></button>
+      </div>
+      <div class="stage">
+        <article class="window" aria-label="Форма записи на сайте">
+          <div class="chrome"><strong>Онлайн-запись</strong><span>Клиника X</span></div>
+          <div class="window-body">
+            <p class="window-label">Услуга</p>
+            <h2>Приём невролога</h2>
+            <dl class="mini-fields">
+              <div class="value"><dt>День</dt><dd>Завтра</dd></div>
+              <div class="value"><dt>Время</dt><dd>11:00</dd></div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="scene" data-scene aria-labelledby="doctor-title" hidden>
+      <div class="story">
+        <p class="eyebrow">Рабочее место врача</p>
+        <h1 id="doctor-title" tabindex="-1">Врач утверждает план</h1>
+        <p class="lead">Врач видит вопрос пациента и проверяет памятку после визита.</p>
+        <button class="advance" type="button" data-next>Утвердить памятку <span aria-hidden="true">→</span></button>
+      </div>
+      <div class="stage">
+        <article class="window" aria-label="Кабинет врача">
+          <div class="chrome"><strong>Кабинет врача</strong><span class="role-chip">Запись подтверждена</span></div>
+          <div class="window-body">
+            <h2>Контрольный приём</h2>
+            <div class="mini-fields">
+              <p class="snippet"><b>Вопрос пациента</b>Что взять на следующий приём?</p>
+              <p class="snippet draft"><b>Черновик памятки</b>Возьмите результаты обследований. Время визита уточнит администратор.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="scene" data-scene aria-labelledby="result-title" hidden>
+      <div class="story">
+        <p class="eyebrow">После приёма</p>
+        <h1 id="result-title" tabindex="-1">Памятка и задача готовы</h1>
+        <p class="lead">Пациент получает памятку, регистратура — задачу согласовать визит.</p>
+        <button class="advance" type="button" data-next>Начать заново <span aria-hidden="true">↺</span></button>
+      </div>
+      <div class="stage stage-end">
+        <div class="result-pair">
+          <article class="window" aria-label="Итог в кабинете пациента">
+            <div class="chrome"><strong>Пациент</strong><span class="role-chip">Утверждено</span></div>
+            <div class="window-body">
+              <h2>Памятка к визиту</h2>
+              <p>Возьмите результаты обследований. Время визита уточнит администратор.</p>
+            </div>
+          </article>
+          <article class="window" aria-label="Итог у регистратуры">
+            <div class="chrome"><strong>Регистратура</strong><span class="role-chip">Новая задача</span></div>
+            <div class="window-body">
+              <h2>Согласовать время</h2>
+              <p>Уточнить дату следующего визита и сообщить пациенту.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="bottom">
+    <div class="frame">
+      <nav aria-label="Навигация показа">
+        <button class="quiet" type="button" id="prev" disabled>← Назад</button>
+        <button class="quiet" type="button" id="reset" hidden>Сначала</button>
+      </nav>
+      <ol class="step-line" aria-label="Этапы показа">
+        <li aria-current="step"><span>Сайт</span></li>
+        <li><span>Врач</span></li>
+        <li><span>Результат</span></li>
+      </ol>
+      <button class="quiet" type="button" id="notes" aria-haspopup="dialog">Реплика</button>
+    </div>
+  </footer>
+  <dialog id="speaker" aria-labelledby="speaker-title">
+    <h2 id="speaker-title">Реплика ведущего</h2>
+    <p id="speaker-text"></p>
+    <form method="dialog"><button type="submit" class="quiet">Закрыть</button></form>
+  </dialog>
+  <script>
+    const scenes = [...document.querySelectorAll('[data-scene]')];
+    const steps = [...document.querySelectorAll('.step-line li')];
+    const previous = document.querySelector('#prev');
+    const reset = document.querySelector('#reset');
+    const speaker = document.querySelector('#speaker');
+    const notes = document.querySelector('#notes');
+    const replies = [
+      'Пациент выбирает время на сайте. Регистратура сразу получает заявку.',
+      'Врач читает вопрос, проверяет памятку и утверждает её одним действием.',
+      'У пациента памятка, у регистратуры — задача. Какие данные в таком визите у вас сегодня переписывают?'
+    ];
+    let current = 0;
+
+    function show(index, focus = true) {
+      current = index;
+      scenes.forEach((scene, position) => {
+        scene.hidden = position !== index;
+        if (position === index) steps[position].setAttribute('aria-current', 'step');
+        else steps[position].removeAttribute('aria-current');
+      });
+      previous.disabled = index === 0;
+      reset.hidden = index === 0 || index === scenes.length - 1;
+      if (focus) scenes[index].querySelector('h1').focus();
+      window.scrollTo(0, 0);
+    }
+
+    function advance() {
+      show((current + 1) % scenes.length);
+    }
+
+    document.querySelectorAll('[data-next]').forEach(button => button.addEventListener('click', advance));
+    previous.addEventListener('click', () => show(current - 1));
+    reset.addEventListener('click', () => show(0));
+    notes.addEventListener('click', () => {
+      document.querySelector('#speaker-text').textContent = replies[current];
+      speaker.showModal();
+    });
+    document.addEventListener('keydown', event => {
+      if (speaker.open || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      if (event.key === 'ArrowRight' && current < scenes.length - 1) {
+        event.preventDefault();
+        show(current + 1);
+      }
+      if (event.key === 'ArrowLeft' && current > 0) {
+        event.preventDefault();
+        show(current - 1);
+      }
+    });
+    show(0, false);
+  </script>
+</body>
+</html>
